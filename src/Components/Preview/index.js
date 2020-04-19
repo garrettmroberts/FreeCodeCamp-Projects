@@ -4,7 +4,6 @@ import marked from "marked";
 function Preview({ state }) {
   const readableState = Object.values(state).join("");
   const viewableHTML = marked(readableState);
-  
   return(
     <div>
       <h1 className="text-center pt-5">Preview</h1>
