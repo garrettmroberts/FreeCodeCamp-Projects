@@ -1,0 +1,14 @@
+.drum-pad {
+  min-height: 100px;
+  min-width: 100px;
+  background-color: aquamarine;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  box-sizing: border-box;
+}
+
+.drum-pad > kbd {
+  font-size: 55px;
+}

@@ -1,0 +1,25 @@
+#display {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+#drum-pads {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#display-container {
+  background-color: white;
+  border-radius: 5px;
+  min-width: 100px;
+  border: 2px solid black;
+  display: absolute;
+  bottom: 50px;
+}
+
+#display {
+  padding: 0 5px;
+  height: 20px;
+}
