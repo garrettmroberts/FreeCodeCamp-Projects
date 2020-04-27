@@ -25,7 +25,9 @@ app.get("/api/timestamp", (req, res) => {
 
 app.get("/api/timestamp/:date_string?", (req, res) => {
   const date_string = req.params.date_string;
-  const date = new Date(date_string);
+  const date = new Date(parseInt(date_string));
+  console.log("DATESTRING: ", date_string);
+  console.log("DATE: ", date);
   if (isNaN(date)) {
     res.json({error: "Invalid Date"});
   };
@@ -38,15 +40,10 @@ app.get("/api/timestamp/:date_string?", (req, res) => {
   });
 });
 
-
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
-
-
-
-
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
