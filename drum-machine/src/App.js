@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Wrapper from './components/Wrapper';
 import DrumPad from "./components/DrumPad";
 import "./App.css";
