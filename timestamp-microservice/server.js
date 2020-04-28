@@ -8,7 +8,7 @@ var app = express();
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
 var cors = require('cors');
-app.use(cors({optionSuccessStatus: 200}));  // some legacy browsers choke on 204
+app.use(cors({ optionSuccessStatus: 200 }));  // some legacy browsers choke on 204
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
@@ -26,6 +26,14 @@ app.get("/api/timestamp", (req, res) => {
 app.get("/api/timestamp/:date_string?", (req, res) => {
   if (req.params.date_string.match(/[-]/)) {
     const d = new Date(req.params.date_string);
+    console.log("DATE: ", d);
+
+    if (isNaN(d)) {
+      res.json({
+        "error": "invalid Date"
+      });
+    };
+
     const unix = d.getTime();
     const utc = d.toUTCString();
     res.json({
@@ -34,6 +42,8 @@ app.get("/api/timestamp/:date_string?", (req, res) => {
     });
   } else {
     let d = new Date(parseInt(req.params.date_string));
+    console.log("DATE: ", d);
+
     const unix = d.getTime();
     const utc = d.toUTCString();
     res.json({
