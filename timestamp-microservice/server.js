@@ -24,20 +24,23 @@ app.get("/api/timestamp", (req, res) => {
 })
 
 app.get("/api/timestamp/:date_string?", (req, res) => {
-  const date_string = req.params.date_string;
-  const date = new Date(parseInt(date_string));
-  console.log("DATESTRING: ", date_string);
-  console.log("DATE: ", date);
-  if (isNaN(date)) {
-    res.json({error: "Invalid Date"});
-  };
-
-  const unix = date.getTime();
-  const utc = date.toUTCString();
-  res.json({
-    unix: unix,
-    utc: utc
-  });
+  if (req.params.date_string.match(/[-]/)) {
+    const d = new Date(req.params.date_string);
+    const unix = d.getTime();
+    const utc = d.toUTCString();
+    res.json({
+      "unix": unix,
+      "utc": utc
+    });
+  } else {
+    let d = new Date(parseInt(req.params.date_string));
+    const unix = d.getTime();
+    const utc = d.toUTCString();
+    res.json({
+      "unix": unix,
+      "utc": utc
+    });
+  }
 });
 
 // http://expressjs.com/en/starter/basic-routing.html
@@ -47,5 +50,5 @@ app.get("/", function (req, res) {
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+  console.log('Your app is listening att http://localhost:' + listener.address().port);
 });
