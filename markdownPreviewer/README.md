@@ -1,3 +1,3 @@
 # Markdown Previewer
 
-This is a simple markdown previewer app built as a FreeCodeCamp project.
+This is a markdown previewer app built as a FreeCodeCamp project.  It accepts any valid markdown syntax and outputs an html-ized version of your input.
