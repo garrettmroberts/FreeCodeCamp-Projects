@@ -34,7 +34,11 @@ const Calculator = () => {
           }
           break;
         case "subtract":
+          if (displayState === "0") {
+            setDisplayState("-");
+          }
           let split = displayState
+            .toString()
             .split(/([/*+-])/)
             .filter(el => {
               return el !== "";
@@ -68,7 +72,29 @@ const Calculator = () => {
   };
 
   const processAnswer = () => {
-    setDisplayState(eval(displayState));
+    if (!displayState.includes("-")) {
+      setDisplayState(eval(displayState));
+    } else {
+      let split = displayState
+        .split(/(-)/)
+        .filter(el => {
+          return el !== "";
+        });
+      let indices = [], i;
+      for(i = 0; i < split.length; i++) {
+        if(split[i] === "-") {
+          indices.push(i);
+        };
+      };
+      indices.forEach((index) => {
+        if (split[index] === split[index + 1]) {
+          let parentheses = "(" + split[index + 1] + split[index + 2] + ")";
+          split.splice(index + 1, index + 2, parentheses);
+          setDisplayState(split.join(""));
+        };
+        setDisplayState(eval(split.join("")));
+      });
+    }
     setFinishedState(true);
   };
 

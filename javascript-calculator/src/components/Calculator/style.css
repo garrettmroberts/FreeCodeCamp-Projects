@@ -9,8 +9,9 @@
 }
 
 #displayContainer {
-  width: 100%;
+  width: 97.8%;
   height: 15%;
+  border: 4px solid black;
 }
 
 #buttonsBox {
@@ -40,13 +41,11 @@
 #left-side {
   width: 80%;
   height: 100%;
-  background-color: blueviolet;
 }
 
 #right-side {
   width: 20%;
   height: 100%;
-  background-color: brown;
 }
 
 .rightSideButton {
@@ -58,7 +57,7 @@
 #bottom-row {
   width: 100%;
   height: 15%;
-  background-color: chartreuse;
+  background-color: black;
 }
 
 .bottomButton {
