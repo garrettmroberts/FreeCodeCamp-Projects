@@ -4,32 +4,72 @@ import "./style.css";
 
 const Calculator = () => {
   const [displayState, setDisplayState] = useState("0");
-  const [currentNumState, setCurrentNumState] = useState();
+  const [finishedState, setFinishedState] = useState(false);
   
   const updateState = event => {
     const target = event.target.innerText;
+    // Takes care of all numbers + decimal
     if (/[0-9.]/.test(target)) {
-      // Drops 0 if first int of number
-      if (displayState === "0") {
-        setDisplayState(target)
-      // Otherwise concats to current num
-      } else {
-        if (target === "." && displayState.charAt(displayState.length - 1) === ".") {
-          return;
+      if (!finishedState) {
+        // Drops 0 if first int of number
+        if (displayState === "0") {
+          // Otherwise concats to current num
+          setDisplayState(target)
+        } else {
+          // Prevents two decimals from appearing in the same integer
+          const split = displayState.split(/[+*/-]/);
+          if (target === "." && split[split.length - 1].includes(".")) {
+            return;
+          };
+          setDisplayState(displayState + target);
         }
-        setDisplayState(displayState + target);
       }
+    // Processes operators
     } else {
-      console.log("operator")
-    }
+      setFinishedState(false);
+      switch (event.target.id) {
+        case "add":
+          if (!/[/+*]/.test(displayState[displayState.length -1])) {
+            setDisplayState(displayState + target);
+          }
+          break;
+        case "subtract":
+          let split = displayState
+            .split(/([/*+-])/)
+            .filter(el => {
+              return el !== "";
+            });
+          // Doesn't allow more than two operators beside each other
+          if (/[/*+ -]{2}/.test(split.slice(split.length - 2).join(""))) {
+            return;
+          } else {
+            setDisplayState(displayState + target);
+          }
+          break;
+        case "divide":
+          if (!/[/+*]/.test(displayState[displayState.length - 1])) {
+            setDisplayState(displayState + "/");
+          }
+          break;
+        case "multiply":
+          if (!/[/+*]/.test(displayState[displayState.length - 1])) {
+            setDisplayState(displayState + target);
+          }
+          break;
+        default:
+          break;
+      };
+    };
   };
 
   const clearState = () => {
     setDisplayState("0");
+    setFinishedState(false);
   };
 
   const processAnswer = () => {
-
+    setDisplayState(eval(displayState));
+    setFinishedState(true);
   };
 
   return(
