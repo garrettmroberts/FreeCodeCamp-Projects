@@ -15,15 +15,31 @@
 
 #setTimerSection {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: rgba(240, 243, 189, 1);
   margin-bottom: 2em;
+}
+
+.timerLength {
+  font-size: 3em;
+}
+
+.incDecButtons {
+  background-color: rgba(0,0,0,0);
+  border: 0 solid rgba(0,0,0,0);
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  min-width: 100px;
 }
 
 .incAndDec {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 5px;
 }
 
 #timerSection {
@@ -39,6 +55,29 @@
 
 #time-left {
   font-size: 4em;
+}
+
+#buttonsSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pomodoroBtn {
+  background-color: rgba(0,0,0,0);
+  border: 0 solid rgba(0,0,0,0);
+  padding: 0 10px;
+}
+
+.resetBtn {
+  font-size: 1.5em;
+}
+
+@keyframes rotateUp { 
+	to { transform: rotate(-90deg); } 
+}
+
+@keyframes rotateBack { 
+	to { transform: rotate(0deg); } 
 }
 
 /* RGB */
